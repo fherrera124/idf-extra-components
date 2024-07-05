@@ -240,7 +240,7 @@ int json_obj_dup_string(jparse_ctx_t* jctx, const char* name, char** str)
     if (!tok) {
         return -OS_FAIL;
     }
-    int   size = tok->end - tok->start + 1;
+    int size = tok->end - tok->start + 1;
     *str = malloc(size);
     if (!*str) {
         return -OS_FAIL;

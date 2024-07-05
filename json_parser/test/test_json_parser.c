@@ -29,6 +29,15 @@ TEST_CASE("json_parser basic tests", "[json_parser]")
     TEST_ASSERT_EQUAL(OS_SUCCESS, json_obj_get_string(&jctx, "str_val", str_val, sizeof(str_val)));
     TEST_ASSERT_EQUAL_STRING("JSON Parser", str_val);
 
+    char *str_dup;
+    TEST_ASSERT_EQUAL(OS_SUCCESS, json_obj_dup_string(&jctx, "str_val", &str_dup));
+    TEST_ASSERT_EQUAL_STRING("JSON Parser", str_dup);
+    free(str_dup);
+
+    bool_val = false;
+    TEST_ASSERT_EQUAL(OS_SUCCESS, json_obj_match_string(&jctx, "str_val", "JSON Parser", &bool_val));
+    TEST_ASSERT_EQUAL(true, bool_val);
+    
     TEST_ASSERT_EQUAL(OS_SUCCESS, json_obj_get_float(&jctx, "float_val", &float_val));
     TEST_ASSERT(fabs(float_val - 2.0f) < 0.0001f);
 
