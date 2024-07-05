@@ -234,6 +234,30 @@ int json_obj_get_string(jparse_ctx_t *jctx, const char *name, char *val, int siz
     return json_tok_to_string(jctx, tok, val, size);
 }
 
+int json_obj_dup_string(jparse_ctx_t* jctx, const char* name, char** str)
+{
+    json_tok_t* tok = json_obj_get_val_tok(jctx, name, JSMN_STRING);
+    if (!tok) {
+        return -OS_FAIL;
+    }
+    int   size = tok->end - tok->start + 1;
+    *str = malloc(size);
+    if (!*str) {
+        return -OS_FAIL;
+    }
+    return json_tok_to_string(jctx, tok, *str, size);
+}
+
+int json_obj_match_string(jparse_ctx_t* jctx, const char* name, const char* str, bool* val)
+{
+    json_tok_t* tok = json_obj_get_val_tok(jctx, name, JSMN_STRING);
+    if (!tok) {
+        return -OS_FAIL;
+    }
+    *val = token_matches_str(jctx, tok, str);
+    return OS_SUCCESS;
+}
+
 int json_obj_get_strlen(jparse_ctx_t *jctx, const char *name, int *strlen)
 {
     json_tok_t *tok = json_obj_get_val_tok(jctx, name, JSMN_STRING);

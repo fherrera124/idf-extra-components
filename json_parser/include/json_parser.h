@@ -55,6 +55,8 @@ int json_obj_get_int(jparse_ctx_t *jctx, const char *name, int *val);
 int json_obj_get_int64(jparse_ctx_t *jctx, const char *name, int64_t *val);
 int json_obj_get_float(jparse_ctx_t *jctx, const char *name, float *val);
 int json_obj_get_string(jparse_ctx_t *jctx, const char *name, char *val, int size);
+int json_obj_match_string(jparse_ctx_t* jctx, const char* name, const char* str, bool* val);
+int json_obj_dup_string(jparse_ctx_t* jctx, const char* name, char** str);
 int json_obj_get_strlen(jparse_ctx_t *jctx, const char *name, int *strlen);
 int json_obj_get_object_str(jparse_ctx_t *jctx, const char *name, char *val, int size);
 int json_obj_get_object_strlen(jparse_ctx_t *jctx, const char *name, int *strlen);
